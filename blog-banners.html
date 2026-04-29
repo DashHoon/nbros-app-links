@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>블로그 배너 미리보기</title>
+    <meta name="robots" content="noindex">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f8fb;
+        --text: #162033;
+        --muted: #667085;
+        --line: #d9e0ea;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      main {
+        width: min(100%, 860px);
+        margin: 0 auto;
+        padding: 36px 18px 52px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0 0 24px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .banner-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .app-banner {
+        min-height: 118px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: #ffffff;
+        background: linear-gradient(135deg, #1769e0, #1aa78c);
+        text-decoration: none;
+      }
+
+      .app-banner strong {
+        display: block;
+        font-size: 26px;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      .app-banner span {
+        display: block;
+        margin-top: 7px;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .app-banner b {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 116px;
+        min-height: 42px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        color: #1769e0;
+        background: #ffffff;
+        font-size: 14px;
+      }
+
+      .app-banner.food {
+        background: linear-gradient(135deg, #e45835, #cf8c21);
+      }
+
+      .app-banner.link {
+        background: linear-gradient(135deg, #4353d8, #0f9f8c);
+      }
+
+      .app-banner.memory {
+        background: linear-gradient(135deg, #26344d, #7087a5);
+      }
+
+      .app-banner.wallpaper {
+        background: linear-gradient(135deg, #0f7a79, #8a65d8);
+      }
+
+      @media (max-width: 560px) {
+        .app-banner {
+          min-height: 136px;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 20px;
+        }
+
+        .app-banner strong {
+          font-size: 23px;
+        }
+
+        .app-banner b {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>블로그 배너 미리보기</h1>
+      <p>각 배너는 앱별 리다이렉트 경로로 연결됩니다. 실제 블로그에서는 href를 배포된 전체 URL로 바꾸면 됩니다.</p>
+
+      <div class="banner-stack">
+        <a class="app-banner" href="./mycheckbox/" target="_blank" rel="noopener">
+          <span>
+            <strong>My체크박스</strong>
+            <span>할 일을 체크하고 깔끔하게 관리하세요.</span>
+          </span>
+          <b>앱 받기</b>
+        </a>
+
+        <a class="app-banner food" href="./myfoodroad/" target="_blank" rel="noopener">
+          <span>
+            <strong>나의 맛집다이어리</strong>
+            <span>좋았던 맛집과 방문 기록을 남겨보세요.</span>
+          </span>
+          <b>앱 받기</b>
+        </a>
+
+        <a class="app-banner link" href="./linkzip/" target="_blank" rel="noopener">
+          <span>
+            <strong>Link.zip</strong>
+            <span>흩어진 링크를 한곳에 정리하세요.</span>
+          </span>
+          <b>앱 받기</b>
+        </a>
+
+        <a class="app-banner memory" href="./memorycleaner/" target="_blank" rel="noopener">
+          <span>
+            <strong>나의 추억정리기</strong>
+            <span>소중한 사진과 추억을 정리하세요.</span>
+          </span>
+          <b>앱 받기</b>
+        </a>
+
+        <a class="app-banner wallpaper" href="./wallpapercalendar/" target="_blank" rel="noopener">
+          <span>
+            <strong>나의 배경화면 달력</strong>
+            <span>달력을 배경화면처럼 간편하게 확인하세요.</span>
+          </span>
+          <b>앱 받기</b>
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
