@@ -17,7 +17,11 @@ GitHub Pages 같은 정적 호스팅에 올려서 접속 기기에 따라 App St
 - iPhone, iPad 접속자는 App Store로 즉시 이동합니다.
 - Android 접속자는 Android package가 있는 앱이면 Google Play로 즉시 이동합니다.
 - Android package가 없는 앱은 iOS만 출시된 상태로 안내하고 App Store 버튼만 제공합니다.
-- 데스크톱 접속자는 자동 이동하지 않고 App Store / Google Play 버튼을 선택할 수 있습니다.
+- PC, Mac 접속자는 자동 이동하지 않고 App Store / Google Play 버튼과 휴대폰 스캔용 QR 코드를 표시합니다.
+
+QR 코드는 배포된 GitHub Pages 앱 링크를 담습니다. PC/Mac에서 QR을 휴대폰으로 스캔하면 `https://dashhoon.github.io/nbros-app-links/?app=앱키`가 휴대폰에서 열리고, iOS 또는 Android 스토어로 바로 이동합니다.
+
+저장소 이름을 바꾸면 `assets/redirect.js`의 `PUBLIC_BASE_URL`도 함께 바꿔야 합니다.
 
 ## 블로그 배너 링크
 

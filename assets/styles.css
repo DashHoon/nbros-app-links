@@ -88,6 +88,41 @@ h1 {
   margin-top: 24px;
 }
 
+.qr-panel {
+  display: grid;
+  grid-template-columns: 136px 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-top: 22px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.qr-code {
+  width: 136px;
+  height: 136px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.qr-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.qr-copy {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .button {
   min-height: 48px;
   display: inline-flex;
@@ -170,5 +205,14 @@ h1 {
 
   .app-list span {
     white-space: normal;
+  }
+
+  .qr-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-code {
+    width: 150px;
+    height: 150px;
   }
 }

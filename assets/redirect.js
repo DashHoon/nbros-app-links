@@ -34,6 +34,8 @@
     },
   };
 
+  const PUBLIC_BASE_URL = "https://dashhoon.github.io/nbros-app-links/";
+
   const HOST_APP_MAP = {
     // 앱별 도메인을 확정한 뒤 아래처럼 추가하세요.
     // "mycheckbox.example.com": "mycheckbox",
@@ -108,8 +110,12 @@
     );
     if (matchedDomain) return matchedDomain[0];
 
-    const pathSegment = normalizeKey((location.pathname || "").split("/").filter(Boolean)[0]);
-    return canonicalAppKey(pathSegment);
+    const pathSegments = (location.pathname || "").split("/").filter(Boolean);
+    const matchedPathKey = pathSegments
+      .map((segment) => canonicalAppKey(segment))
+      .find(Boolean);
+
+    return matchedPathKey || "";
   }
 
   function renderShell(content) {
@@ -150,9 +156,13 @@
     `);
   }
 
-  function renderManualLinks(app, platform) {
+  function renderManualLinks(app, platform, appKey) {
     const iosUrl = appStoreUrl(app);
     const androidUrl = playStoreUrl(app);
+    const description = platform === "desktop"
+      ? "PC 또는 Mac에서는 사용하는 휴대폰에 맞는 스토어를 선택하세요."
+      : "자동 이동이 시작되지 않으면 아래 버튼으로 스토어를 선택하세요.";
+    const qrBlock = platform === "desktop" ? renderQrBlock(app, appKey) : "";
     const androidButton = androidUrl
       ? `<a class="button secondary" href="${androidUrl}">Google Play로 이동</a>`
       : `<span class="button disabled" aria-disabled="true">Android 출시 예정</span>`;
@@ -163,13 +173,33 @@
     renderShell(`
       <p class="eyebrow">App Link</p>
       <h1>${escapeHtml(app.name)}</h1>
-      <p class="muted">자동 이동이 시작되지 않으면 아래 버튼으로 스토어를 선택하세요.</p>
+      <p class="muted">${description}</p>
       ${notice}
       <div class="actions">
         <a class="button" href="${iosUrl}">App Store로 이동</a>
         ${androidButton}
       </div>
+      ${qrBlock}
     `);
+  }
+
+  function appLinkUrl(appKey) {
+    return `${PUBLIC_BASE_URL}?app=${encodeURIComponent(appKey)}`;
+  }
+
+  function renderQrBlock(app, appKey) {
+    const qrTargetUrl = appLinkUrl(appKey);
+    const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=192x192&margin=10&data=${encodeURIComponent(qrTargetUrl)}`;
+
+    return `
+      <div class="qr-panel">
+        <img class="qr-code" src="${escapeHtml(qrSrc)}" alt="${escapeHtml(app.name)} 링크 QR 코드" width="136" height="136" loading="lazy" referrerpolicy="no-referrer">
+        <div>
+          <p class="qr-title">휴대폰으로 바로 열기</p>
+          <p class="qr-copy">휴대폰 카메라로 QR 코드를 스캔하면 배포된 앱 링크가 열리고, 기기에 맞는 스토어로 이동합니다.</p>
+        </div>
+      </div>
+    `;
   }
 
   function redirectTo(url) {
@@ -186,7 +216,7 @@
       return;
     }
 
-    renderManualLinks(app, platform);
+    renderManualLinks(app, platform, appKey);
 
     if (platform === "ios") {
       redirectTo(appStoreUrl(app));
@@ -201,6 +231,8 @@
   window.AppLinkRedirector = {
     APPS,
     HOST_APP_MAP,
+    PUBLIC_BASE_URL,
+    appLinkUrl,
     appStoreUrl,
     canonicalAppKey,
     detectPlatform,
